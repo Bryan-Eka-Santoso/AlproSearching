@@ -8,6 +8,7 @@ int menu, temp, backMenu;
 int n = 2000000;
 int arr[2000000];
 int UseNumber = 1000000;
+int arrBaru[1000000];
 
 void simpanFile(){
     ofstream myFile;
@@ -40,25 +41,25 @@ void bacaFile() {
     }
 }
 
-void bacaFileRandom() {
-    ifstream myFile;
-    myFile.open("data_angkaRandom.txt");
-    if (myFile.is_open()) {
-        int j, i = 0;
-        while (myFile >> j) {
-            arr[i] = j;
-            i++;
-        }
-        myFile.close();
-    }
-}
-
 void simpanFileRandom(){
     ofstream myFile;
     myFile.open("data_angkaRandom.txt", ios::out);
     if (myFile.is_open()) {
         for(int i = 0; i < UseNumber; i++){
             myFile << arr[i] << endl;
+        }
+        myFile.close();
+    }
+}
+
+void bacaFileRandom() {
+    ifstream myFile;
+    myFile.open("data_angkaRandom.txt");
+    if (myFile.is_open()) {
+        int j, i = 0;
+        while (myFile >> j) {
+            arrBaru[i] = j;
+            i++;
         }
         myFile.close();
     }
@@ -90,7 +91,7 @@ int main()
     do {
         cout << "== Searching Menu ==" << endl;
         cout << "1. Generate Number" << endl;
-        cout << "2. Sort ( " << endl;
+        cout << "2. Insertion Sort" << endl;
         cout << "3. Linear Search" << endl;
         cout << "4. Binary Search" << endl;
         cout << "5. Interpolation Search" << endl;
@@ -112,6 +113,7 @@ int main()
                     double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
                     simpanFileRandom();
                     addLine();
+                    bacaFileRandom();
 
                     cout << "Generate Number: " << endl << endl;
 
@@ -119,22 +121,25 @@ int main()
 
                     cout << "Generate Number: " << duration << " Seconds" << endl;
                     cout << "0. Back" << endl;
-                    cout << ">> ";
-                    cin >> backMenu;
+                    do {
+                        cout << ">> ";
+                        cin >> backMenu;
+                    } while (backMenu < 0 || backMenu > 0);
                 } while (backMenu != 0);
                 system("cls");
             break;
             }
             case 2:{
                 do {
+                    cout << "Sedang Menyorting .." << endl;
                     clock_t start_time = clock();
 
-                    for(int i = 1; i < UseNumber-1; i++{
+                    for(int i = 1; i < UseNumber-1; i++){
                         for(int j = 0; j <= i-1; j++){
-                            if(arr[j] > arr[i]){
+                            if(arrBaru[j] > arrBaru[i]){
                                 temp = arr[j];
-                                arr[j] = arr[i];
-                                arr[i] = temp;
+                                arrBaru[j] = arrBaru[i];
+                                arrBaru[i] = temp;
                             }
                         }
                     }
@@ -143,126 +148,56 @@ int main()
                     // For Seconds
                     double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
 
-                    cout << "Selection Sort: " << endl;
+                    cout << "Insertion Sort: " << endl;
 
-                    for(int k = 0; k < n; k++){
-                        cout << arr[k] << " ";
+                    for(int k = 0; k < UseNumber; k++){
+                        cout << arrBaru[k] << " ";
                     }
 
                     cout << endl << endl;
-                    cout << "Selection Sort took " << duration << " Seconds" << endl;
-                    simpanDurasi(duration, "Selection Sort", n);
+                    cout << "Insertion Sort took " << duration << " Seconds" << endl;
+                    simpanDurasi(duration, "Insertion Sort", n);
                     cout << "0. Back" << endl;
-                    cout << ">> ";
-                    cin >> backMenu;
+                    do {
+                        cout << ">> ";
+                        cin >> backMenu;
+                    } while (backMenu < 0 || backMenu > 0);
                 } while (backMenu != 0);
                 system("cls");
             break;
             }
             case 3:{
                 do {
-                    clock_t start_time = clock();
-
-                    for(int i = 0; i < n-1; i++){
-                        for(int j = i+1; j < n; j++){
-                            if(arr[i] > arr[j]){
-                                temp = arr[j];
-                                arr[j] = arr[i];
-                                arr[i] = temp;
-                            }
-                        }
-                    }
-                    clock_t end_time = clock();
-                    // For Seconds
-                    double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-
-                    cout << "Straight Selection Sort: " << endl;
-
-                    for(int k = 0; k < n; k++){
-                        cout << arr[k] << " ";
-                    }
-
-                    cout << endl << endl;
-                    cout << "Bubble Sort took " << duration << " Seconds" << endl;
-                    simpanDurasi(duration, "Straight Selection Sort", n);
+                    cout << "Linear Search: " << endl;
                     cout << "0. Back" << endl;
-                    cout << ">> ";
-                    cin >> backMenu;
+                    do {
+                        cout << ">> ";
+                        cin >> backMenu;
+                    } while (backMenu < 0 || backMenu > 0);
                 } while (backMenu != 0);
                 system("cls");
             break;
             }
             case 4:{
                 do {
-                    clock_t start_time = clock();
-
-                    for (int i = 0; i < n-1; i++){
-                        for (int j = 0; j < n-i-1; j++){
-                            if (arr[j] > arr[j+1]){
-                            temp = arr[j];
-                            arr[j] = arr[j+1];
-                            arr[j+1] = temp;
-                            }
-                        }
-                    }
-                    clock_t end_time = clock();
-                    // For Seconds
-                    double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-
-
-                    cout << "Bubble Sort: " << endl;
-
-                    for(int k = 0; k < n; k++){
-                        cout << arr[k] << " ";
-                    }
-
-                    cout << endl << endl;
-                    cout << "Bubble Sort took " << duration << " Seconds" << endl;
-                    simpanDurasi(duration, "Bubble Sort", n);
+                    cout << "Binary Search: " << endl;
                     cout << "0. Back" << endl;
-                    cout << ">> ";
-                    cin >> backMenu;
+                    do {
+                        cout << ">> ";
+                        cin >> backMenu;
+                    } while (backMenu < 0 || backMenu > 0);
                 } while (backMenu != 0);
                 system("cls");
             break;
             }
             case 5:{
                 do {
-                    clock_t start_time = clock();
-
-                    for (int i = 0; i < n/2; i++){
-                        for (int j = i; j < n-1-i; j++){
-                            if (arr[j] > arr[j+1]){
-                                temp = arr[j];
-                                arr[j] = arr[j+1];
-                                arr[j+1] = temp;
-                            }
-                        }
-                        for (int j = n-2-i; j > i ;j--){
-                            if (arr[j-1] > arr[j]){
-                                temp = arr[j];
-                                arr[j] = arr[j-1];
-                                arr[j-1] = temp;
-                            }
-                        }
-                    }
-                    clock_t end_time = clock();
-                    // For Seconds
-                    double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-
-
-                    cout << "Two Way Bubble Sort: " << endl;
-
-                    for(int k = 0; k < n; k++){
-                        cout << arr[k] << " ";
-                    }
-
-                    cout << endl << endl;
-                    cout << "Two Way Bubble Sort took " << duration << " Seconds" << endl;
-                    simpanDurasi(duration, "Two Way Bubble Sort", n);
+                    cout << "Interpolation Search: " << endl;
                     cout << "0. Back" << endl;
-                    cout << ">> ";
-                    cin >> backMenu;
+                    do {
+                        cout << ">> ";
+                        cin >> backMenu;
+                    } while (backMenu < 0 || backMenu > 0);
                 } while (backMenu != 0);
                 system("cls");
             break;

@@ -1,0 +1,9 @@
+---------- New Random Number ----------
+
+---------- New Random Number ----------
+Insertion Sort ( 2000000 Data Numbers ) : 1231.22 Seconds
+
+---------- New Random Number ----------
+Insertion Sort ( 2000000 Data Numbers ) : 1381.26 Seconds
+
+---------- New Random Number ----------
