@@ -9,6 +9,7 @@ int n = 2000000;
 int arr[2000000];
 int UseNumber = 1000000;
 int arrBaru[1000000];
+int arrSort[1000000];
 
 
 void simpanFile(){
@@ -60,6 +61,7 @@ void bacaFileRandom() {
         int j, i = 0;
         while (myFile >> j) {
             arrBaru[i] = j;
+            arrSort[i] = j;
             i++;
         }
         myFile.close();
@@ -70,7 +72,30 @@ void simpanDurasi(double duration, string nameSort, int n){
     ofstream myFile;
     myFile.open("duration.txt", ios::app);
     if (myFile.is_open()) {
-        myFile << nameSort << " ( " << UseNumber << " Data Numbers" << " ) " << ": " << duration << " Seconds" << endl;
+        myFile << nameSort << " ( " << UseNumber << " Data Numbers" << " ) " << ": " << duration << " Seconds" << endl << endl;
+        myFile.close();
+    }
+}
+
+void simpanFileSort(){
+    ofstream myFile;
+    myFile.open("data_angkaSort.txt", ios::out);
+    if (myFile.is_open()) {
+        for(int i = 0; i < UseNumber; i++){
+            myFile << arrSort[i] << endl;
+        }
+        myFile.close();
+    }
+}
+void bacaFileSort(){
+    ifstream myFile;
+    myFile.open("data_angkaSort.txt");
+    if (myFile.is_open()) {
+        int j, i = 0;
+        while (myFile >> j) {
+            arrSort[i] = j;
+            i++;
+        }
         myFile.close();
     }
 }
@@ -79,7 +104,7 @@ void addLine(){
     ofstream myFile;
     myFile.open("duration.txt", ios::app);
     if (myFile.is_open()) {
-        myFile << endl << "---------- New Random Number ----------" << endl;
+        myFile << "---------- New Random Number ----------" << endl;
         myFile.close();
     }
 }
@@ -87,12 +112,13 @@ void addLine(){
 int main()
 {
     srand(time(0));
-    bacaFileRandom();
+    bacaFileSort();
 
     do {
         bool flag;
         int length = sizeof(arrBaru)/sizeof(arrBaru[0]);
-        int mid,low,high,dicari;
+        int mid, low, high, dicari;
+
         cout << "== Searching Menu ==" << endl;
         cout << "1. Generate Number" << endl;
         cout << "2. Insertion Sort" << endl;
@@ -100,6 +126,7 @@ int main()
         cout << "4. Binary Search" << endl;
         cout << "5. Interpolation Search" << endl;
         cout << "0. Exit" << endl;
+
         do {
             cout << ">> ";
             cin >> menu;
@@ -112,7 +139,7 @@ int main()
                     clock_t start_time = clock();
                     simpanFile();
                     bacaFile();
-                     clock_t end_time = clock();
+                    clock_t end_time = clock();
                     // For seconds
                     double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
                     simpanFileRandom();
@@ -140,10 +167,10 @@ int main()
 
                     for(int i = 1; i < UseNumber; i++){
                         for(int j = 0; j <= i-1; j++){
-                            if(arrBaru[j] > arrBaru[i]){
-                                temp = arrBaru[j];
-                                arrBaru[j] = arrBaru[i];
-                                arrBaru[i] = temp;
+                            if(arrSort[j] > arrSort[i]){
+                                temp = arrSort[j];
+                                arrSort[j] = arrSort[i];
+                                arrSort[i] = temp;
                             }
                         }
                     }
@@ -151,16 +178,17 @@ int main()
                     clock_t end_time = clock();
                     // For Seconds
                     double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+                    simpanFileSort();
 
                     cout << "Insertion Sort: " << endl;
 
                     for(int k = 0; k < UseNumber; k++){
-                        cout << arrBaru[k] << endl;
+                        cout << arrSort[k] << endl;
                     }
 
                     cout << endl << endl;
                     cout << "Insertion Sort took " << duration << " Seconds" << endl;
-                    simpanDurasi(duration, "Insertion Sort", n);
+                    simpanDurasi(duration, "Insertion Sort", UseNumber);
                     cout << "0. Back" << endl;
                     do {
                         cout << ">> ";
@@ -172,15 +200,14 @@ int main()
             }
             case 3:{
                 do {
-
                     cout << "Linear Search: " << endl;
                     cout << "0. Back" << endl;
                     do {
                         cout << ">> ";
                         cin >> backMenu;
                     } while (backMenu < 0 || backMenu > 0);
-                    
-                   
+
+
                 } while (backMenu != 0);
                 system("cls");
             break;
@@ -188,33 +215,42 @@ int main()
             case 4:{
                 do {
                     cout << "Binary Search: " << endl;
+                    low = 0;
+                    high = length-1;
+                    flag = true;
+
+                    cout << endl << "Masukkan angka yang mau dicari: ";
+                    cin >> dicari;
+
+                    clock_t start_time = clock();
+                    while (flag){
+                        mid = low + (high - low) / 2;
+                        if (arrSort[mid] < dicari){
+                            low = mid + 1;
+                        }
+                        else if (arrSort[mid] > dicari){
+                            high = mid - 1;
+                        }
+                        if (arrSort[mid] == dicari){
+                           cout << "Angka "<< arrSort[mid] << " berhasil ditemukan" << endl;
+                            flag = false;
+                        }if (low > high ){
+                           cout << endl << "Not found" << endl;
+                            flag = false;
+                        }
+                    }
+                    clock_t end_time = clock();
+                    // For Seconds
+                    double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+                    cout << endl;
                     cout << "0. Back" << endl;
+                    cout << "Binary Search took " << duration << " Seconds" << endl;
+                    simpanDurasi(duration, "Binary Search", UseNumber);
                     do {
                         cout << ">> ";
                         cin >> backMenu;
                     } while (backMenu < 0 || backMenu > 0);
-                    cout << endl << "masukkan angka yang mau dicari: ";
-                    cin >> dicari;
-                    low =   0;
-                    high = length-1;
-                    flag=true;
-                
-                    while (flag ){
-                        mid = low + (high - low)/2;
-                        if (arrBaru [mid] < dicari){
-                            low = mid + 1;
-                        }
-                        else if (arrBaru[mid] > dicari){
-                            high = mid - 1;
-                        }
-                        if (arrBaru[mid]== dicari){
-                           cout << endl << "angka "<< arrBaru[mid] << " berhasil ditemukan" ;
-                            flag = false;
-                        }if (low > high ){
-                           cout << endl << "not found";
-                            flag = false;
-                        }
-                    }
                 } while (backMenu != 0);
                 system("cls");
             break;
@@ -222,33 +258,42 @@ int main()
             case 5:{
                 do {
                     cout << "Interpolation Search: " << endl;
+                    flag = true;
+                    low = 0;
+                    high = length-1;
+
+                    cout << endl << "Masukkan angka yang mau dicari: ";
+                    cin >> dicari;
+
+                    clock_t start_time = clock();
+                    while (flag){
+                        mid = low + ((dicari - arrSort[low]) * (high - low) / (arrSort[high] - arrSort[low]));
+                        if (arrSort [mid] < dicari){
+                            low = mid + 1;
+                        }
+                        if (arrSort[mid] > dicari){
+                            high = mid - 1;
+                        }
+                        if (arrSort[mid] == dicari){
+                            cout << "Angka "<< arrSort[mid] << " berhasil ditemukan" << endl;
+                            flag = false;
+                        }if (low > high){
+                            cout << endl << "Not found" << endl;
+                            flag = false;
+                        }
+                    }
+                    clock_t end_time = clock();
+                    // For Seconds
+                    double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
+                    cout << endl;
                     cout << "0. Back" << endl;
+                    cout << "Interpolation Search took " << duration << " Seconds" << endl;
+                    simpanDurasi(duration, "Interpolation Search", UseNumber);
                     do {
                         cout << ">> ";
                         cin >> backMenu;
                     } while (backMenu < 0 || backMenu > 0);
-                    flag=true;
-                    low =   0;
-                    high = length-1;
-                    while (flag){
-                        mid = low + ((dicari - arr[low]) * (high - low) / (arr[high] - arr[low]) );
-                
-                
-                        if (arr [mid] < dicari){
-                            low = mid + 1;
-                        }
-                        if (arr[mid] > dicari){
-                            high = mid - 1;
-                        }
-                        if (arr[mid]== dicari){
-                            cout << endl << "angka "<< arr[mid] << " berhasil ditemukan" ;
-                            flag = false;
-                        }if (low > high ){
-                            cout << endl << "not found";
-                            flag = false;
-                        }
-                
-                    }
                 } while (backMenu != 0);
                 system("cls");
             break;

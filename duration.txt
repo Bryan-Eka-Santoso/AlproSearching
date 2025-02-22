@@ -1,0 +1,22 @@
+---------- New Random Number ----------
+Insertion Sort ( 1000 Data Numbers ) : 0.001 Seconds
+
+Binary Search ( 1000 Data Numbers ) : 0.001 Seconds
+
+Interpolation Search ( 1000 Data Numbers ) : 0.001 Seconds
+
+---------- New Random Number ----------
+Insertion Sort ( 1000000 Data Numbers ) : 966.484 Seconds
+
+Binary Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
+Binary Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
+Binary Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
+Binary Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
+Interpolation Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
+Interpolation Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
