@@ -10,6 +10,7 @@ int arr[2000000];
 int UseNumber = 1000000;
 int arrBaru[1000000];
 
+
 void simpanFile(){
     ofstream myFile;
     myFile.open("data_angka.txt", ios::out);
@@ -89,6 +90,9 @@ int main()
     bacaFileRandom();
 
     do {
+        bool flag;
+        int length = sizeof(arrBaru)/sizeof(arrBaru[0]);
+        int mid,low,high,dicari;
         cout << "== Searching Menu ==" << endl;
         cout << "1. Generate Number" << endl;
         cout << "2. Insertion Sort" << endl;
@@ -168,12 +172,15 @@ int main()
             }
             case 3:{
                 do {
+
                     cout << "Linear Search: " << endl;
                     cout << "0. Back" << endl;
                     do {
                         cout << ">> ";
                         cin >> backMenu;
                     } while (backMenu < 0 || backMenu > 0);
+                    
+                   
                 } while (backMenu != 0);
                 system("cls");
             break;
@@ -186,6 +193,28 @@ int main()
                         cout << ">> ";
                         cin >> backMenu;
                     } while (backMenu < 0 || backMenu > 0);
+                    cout << endl << "masukkan angka yang mau dicari: ";
+                    cin >> dicari;
+                    low =   0;
+                    high = length-1;
+                    flag=true;
+                
+                    while (flag ){
+                        mid = low + (high - low)/2;
+                        if (arrBaru [mid] < dicari){
+                            low = mid + 1;
+                        }
+                        else if (arrBaru[mid] > dicari){
+                            high = mid - 1;
+                        }
+                        if (arrBaru[mid]== dicari){
+                           cout << endl << "angka "<< arrBaru[mid] << " berhasil ditemukan" ;
+                            flag = false;
+                        }if (low > high ){
+                           cout << endl << "not found";
+                            flag = false;
+                        }
+                    }
                 } while (backMenu != 0);
                 system("cls");
             break;
@@ -198,6 +227,28 @@ int main()
                         cout << ">> ";
                         cin >> backMenu;
                     } while (backMenu < 0 || backMenu > 0);
+                    flag=true;
+                    low =   0;
+                    high = length-1;
+                    while (flag){
+                        mid = low + ((dicari - arr[low]) * (high - low) / (arr[high] - arr[low]) );
+                
+                
+                        if (arr [mid] < dicari){
+                            low = mid + 1;
+                        }
+                        if (arr[mid] > dicari){
+                            high = mid - 1;
+                        }
+                        if (arr[mid]== dicari){
+                            cout << endl << "angka "<< arr[mid] << " berhasil ditemukan" ;
+                            flag = false;
+                        }if (low > high ){
+                            cout << endl << "not found";
+                            flag = false;
+                        }
+                
+                    }
                 } while (backMenu != 0);
                 system("cls");
             break;
