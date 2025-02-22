@@ -69,7 +69,7 @@ void simpanDurasi(double duration, string nameSort, int n){
     ofstream myFile;
     myFile.open("duration.txt", ios::app);
     if (myFile.is_open()) {
-        myFile << nameSort << " ( " << n << " Data Numbers" << " ) " << ": " << duration << " Seconds" << endl;
+        myFile << nameSort << " ( " << UseNumber << " Data Numbers" << " ) " << ": " << duration << " Seconds" << endl;
         myFile.close();
     }
 }
@@ -134,10 +134,10 @@ int main()
                     cout << "Sedang Menyorting .." << endl;
                     clock_t start_time = clock();
 
-                    for(int i = 1; i < UseNumber-1; i++){
+                    for(int i = 1; i < UseNumber; i++){
                         for(int j = 0; j <= i-1; j++){
                             if(arrBaru[j] > arrBaru[i]){
-                                temp = arr[j];
+                                temp = arrBaru[j];
                                 arrBaru[j] = arrBaru[i];
                                 arrBaru[i] = temp;
                             }
@@ -151,7 +151,7 @@ int main()
                     cout << "Insertion Sort: " << endl;
 
                     for(int k = 0; k < UseNumber; k++){
-                        cout << arrBaru[k] << " ";
+                        cout << arrBaru[k] << endl;
                     }
 
                     cout << endl << endl;
