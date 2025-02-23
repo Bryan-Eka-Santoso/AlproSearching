@@ -112,12 +112,14 @@ void addLine(){
 int main()
 {
     srand(time(0));
+    bacaFileRandom();
     bacaFileSort();
 
     do {
         bool flag;
         int length = sizeof(arrBaru)/sizeof(arrBaru[0]);
-        int mid, low, high, dicari;
+        long long  low, high, dicari;
+        long long mid;
 
         cout << "== Searching Menu ==" << endl;
         cout << "1. Generate Number" << endl;
@@ -201,6 +203,24 @@ int main()
             case 3:{
                 do {
                     cout << "Linear Search: " << endl;
+                     cout << endl << "Masukkan angka yang mau dicari: ";
+                    cin >> dicari;
+                    flag = true;
+                    int ctr;
+                    ctr = 0;
+                    bool found = false;
+                    while (flag && ctr < length){
+                        if (arrBaru[ctr] == dicari){
+                            cout << "found"<<endl;
+                            flag = false;
+
+                            found = true;
+                        }
+                        ctr = ctr +1;
+                    };
+                    if (!found){
+                        cout << "not found"<<endl;
+                    }
                     cout << "0. Back" << endl;
                     do {
                         cout << ">> ";
@@ -215,6 +235,7 @@ int main()
             case 4:{
                 do {
                     cout << "Binary Search: " << endl;
+
                     low = 0;
                     high = length-1;
                     flag = true;
@@ -225,6 +246,7 @@ int main()
                     clock_t start_time = clock();
                     while (flag){
                         mid = low + (high - low) / 2;
+
                         if (arrSort[mid] < dicari){
                             low = mid + 1;
                         }
@@ -257,30 +279,35 @@ int main()
             }
             case 5:{
                 do {
+
                     cout << "Interpolation Search: " << endl;
-                    flag = true;
                     low = 0;
                     high = length-1;
+                    flag = true;
 
                     cout << endl << "Masukkan angka yang mau dicari: ";
                     cin >> dicari;
 
                     clock_t start_time = clock();
                     while (flag){
-                        mid = low + ((dicari - arrSort[low]) * (high - low) / (arrSort[high] - arrSort[low]));
-                        if (arrSort [mid] < dicari){
+
+
+                        mid = low + ((dicari - arrSort[low]) * (high - low) /(arrSort[high] - arrSort[low]) );
+
+                        if (arrSort[mid] < dicari){
                             low = mid + 1;
                         }
-                        if (arrSort[mid] > dicari){
+                        else if (arrSort[mid] > dicari){
                             high = mid - 1;
                         }
                         if (arrSort[mid] == dicari){
-                            cout << "Angka "<< arrSort[mid] << " berhasil ditemukan" << endl;
+                           cout << "Angka "<< arrSort[mid] << " berhasil ditemukan" << endl;
                             flag = false;
-                        }if (low > high){
-                            cout << endl << "Not found" << endl;
+                        }if (low > high ){
+                           cout << endl << "Not found" << endl;
                             flag = false;
                         }
+
                     }
                     clock_t end_time = clock();
                     // For Seconds
