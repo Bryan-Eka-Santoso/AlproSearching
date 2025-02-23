@@ -20,3 +20,17 @@ Interpolation Search ( 1000000 Data Numbers ) : 0.001 Seconds
 
 Interpolation Search ( 1000000 Data Numbers ) : 0.001 Seconds
 
+---------- New Random Number ----------
+---------- New Random Number ----------
+Linear Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
+Linear Search ( 1000000 Data Numbers ) : 0 Seconds
+
+Linear Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
+Linear Search ( 1000000 Data Numbers ) : 0.003 Seconds
+
+Binary Search ( 1000000 Data Numbers ) : 0.001 Seconds
+
+Binary Search ( 1000000 Data Numbers ) : 0.001 Seconds
+

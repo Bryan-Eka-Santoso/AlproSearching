@@ -118,8 +118,7 @@ int main()
     do {
         bool flag;
         int length = sizeof(arrBaru)/sizeof(arrBaru[0]);
-        long long  low, high, dicari;
-        long long mid;
+        long long low, mid, high, dicari;
 
         cout << "== Searching Menu ==" << endl;
         cout << "1. Generate Number" << endl;
@@ -203,31 +202,38 @@ int main()
             case 3:{
                 do {
                     cout << "Linear Search: " << endl;
-                     cout << endl << "Masukkan angka yang mau dicari: ";
+
+                    cout << endl << "Masukkan angka yang mau dicari: ";
                     cin >> dicari;
+
                     flag = true;
                     int ctr;
                     ctr = 0;
                     bool found = false;
+                    clock_t start_time = clock();
                     while (flag && ctr < length){
                         if (arrBaru[ctr] == dicari){
-                            cout << "found"<<endl;
+                           cout << "Angka "<< dicari << " berhasil ditemukan" << endl;
                             flag = false;
-
                             found = true;
                         }
-                        ctr = ctr +1;
+                        ctr = ctr + 1;
                     };
+                    clock_t end_time = clock();
+                    // For Seconds
+                    double duration = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+
                     if (!found){
-                        cout << "not found"<<endl;
+                        cout << "Not Found" << endl;
                     }
+                    cout << endl;
                     cout << "0. Back" << endl;
+                    cout << "Linear Search took " << duration << " Seconds" << endl;
+                    simpanDurasi(duration, "Linear Search", UseNumber);
                     do {
                         cout << ">> ";
                         cin >> backMenu;
                     } while (backMenu < 0 || backMenu > 0);
-
-
                 } while (backMenu != 0);
                 system("cls");
             break;
@@ -257,7 +263,7 @@ int main()
                            cout << "Angka "<< arrSort[mid] << " berhasil ditemukan" << endl;
                             flag = false;
                         }if (low > high ){
-                           cout << endl << "Not found" << endl;
+                           cout << endl << "Not Found" << endl;
                             flag = false;
                         }
                     }
@@ -304,7 +310,7 @@ int main()
                            cout << "Angka "<< arrSort[mid] << " berhasil ditemukan" << endl;
                             flag = false;
                         }if (low > high ){
-                           cout << endl << "Not found" << endl;
+                           cout << endl << "Not Found" << endl;
                             flag = false;
                         }
 
